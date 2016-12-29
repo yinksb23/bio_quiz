@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TheBioQuiz</string>
+    <string name="login">login</string>
+    <string name="true_button">true_button</string>
+    <string name="TRUE">TRUE</string>
+    <string name="false_button">FALSE</string>
+    <string name="cheat_button">CHEAT</string>
+    <string name="next_button">NEXT</string>
+    <string name="question_1">Insert Question 1</string>
+    <string name="question_2">Insert Question 2</string>
+    <string name="question_3">Insert Question 3</string>
+    <string name="question_4">Insert Question 4</string>
+    <string name="question_5">Insert Question 5</string>
+    <string name="finalscore">FinalScore</string>
+    <string name="warning_text">Are you sure?</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="correct_toast">Correct</string>
+    <string name="incorrect_toast">Incorrect</string>
+    <string name="answertotal_toast">You must answer all questions before you can see your score!</string>
+    <string name="save_score">SAVE SCORE</string>
+</resources>
