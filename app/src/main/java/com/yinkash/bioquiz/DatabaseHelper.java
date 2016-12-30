@@ -9,15 +9,12 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by yinksb23 on 13/12/2016.
- */
-
 public class DatabaseHelper extends SQLiteOpenHelper {
+
     public static final String TAG = "COMP211P";
 
     //Database Version
-    private static final int DATABASE_VERSION= 1;
+    private static final int DATABASE_VERSION = 1;
 
     //Database Name
     private static final String DATABASE_NAME = "contacts.db";//Name of database
@@ -34,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PASS = "pass";
     private static final String COLUMN_SCORE = "score";
 
-    public DatabaseHelper(Context context){
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -63,15 +60,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Creates a new player
-    public void insertContact(Contact c)
-    {
-        db= this.getWritableDatabase();
+    public void insertContact(Contact c) {
+        db = this.getWritableDatabase();
 
         //Verify there are no two users with the same Username
         boolean CONTACT_NOT_ADDED = !doesContactExist(c.getUname());
 
-        if(CONTACT_NOT_ADDED)
-        {
+        if (CONTACT_NOT_ADDED) {
             ContentValues values = new ContentValues();
 
             String query = "select * from contacts";
@@ -86,7 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             db.insert(TABLE_NAME, null, values);
             db.close();
-        } else{
+        } else {
 
             Log.d(TAG, "addUser: " + c.getUname() + " already exists in the database.");
         }
@@ -102,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Contact contact = null;
 
-        if (cursor != null && cursor.getCount()>0) {
+        if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             contact = new Contact(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
             cursor.close();
@@ -165,7 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteContact(Contact contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_UNAME + " = ?",
-                new String[] { contact.getUname() });
+                new String[]{contact.getUname()});
         db.close();
     }
 
@@ -224,43 +219,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public String searchPass (String y)
-    {
+    public String searchPass(String y) {
         db = this.getReadableDatabase();
         Cursor cursor = db.query("contacts", null, " uname=?",
-                new String[] { y }, null, null, null);
+                new String[]{y}, null, null, null);
 
         //Cursor cursor1 = db.query()
 
-        if(cursor.getCount()<1) // UserName Not Exist
+        if (cursor.getCount() < 1) // UserName Not Exist
         {
             cursor.close();
             return "NOT EXIST";
         }
         cursor.moveToFirst();
-        String z= cursor.getString(cursor.getColumnIndex("pass"));
+        String z = cursor.getString(cursor.getColumnIndex("pass"));
         cursor.close();
         db.close();
         return z;
     }
 
-    public String publishLeaderboard(String testEmail1, String testUname1){
+    public String publishLeaderboard(String testEmail1, String testUname1) {
 
         //IT WORKS
         String testUname = testUname1;
         String testEmail = testEmail1;
         db = this.getReadableDatabase();
-        String [] columns = new String[]{COLUMN_ID, COLUMN_EMAIL, COLUMN_SCORE};
-        Cursor c = db.query(TABLE_SCORES, columns, COLUMN_EMAIL + "='" + testEmail + "'", null, null, null, COLUMN_SCORE+" DESC");
+        String[] columns = new String[]{COLUMN_ID, COLUMN_EMAIL, COLUMN_SCORE};
+        Cursor c = db.query(TABLE_SCORES, columns, COLUMN_EMAIL + "='" + testEmail + "'", null, null, null, COLUMN_SCORE + " DESC");
         String result = "";
 
         int cID = c.getColumnIndex(COLUMN_ID);
         int cEmail = c.getColumnIndex(COLUMN_EMAIL);
         int cScore = c.getColumnIndex(COLUMN_SCORE);
 
-        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
-        {
-            result = result + "Scores for user " + testUname + " "  + c.getString(2) + "\n";
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            result = result + "Scores for user " + testUname + " " + c.getString(2) + "\n";
         }
 
         c.close();

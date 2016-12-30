@@ -18,7 +18,7 @@ public class CheatActivity extends AppCompatActivity {
     private TextView mAnswerTextView;
     private Button mShowAnswer;
 
-    public static Intent newIntent(Context packageContext, boolean answerIsTrue){
+    public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
         Intent i = new Intent(packageContext, CheatActivity.class);
         i.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
         return i;
@@ -31,9 +31,9 @@ public class CheatActivity extends AppCompatActivity {
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
-        mAnswerTextView = (TextView)findViewById(R.id.answer_text_view);
+        mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
 
-        mShowAnswer = (Button)findViewById(R.id.show_answer_button);
+        mShowAnswer = (Button) findViewById(R.id.show_answer_button);
         mShowAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

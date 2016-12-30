@@ -33,7 +33,7 @@ public class BioQuiz extends AppCompatActivity {
     private Question[] mQuestionBank = new Question[]{
 
             new Question(R.string.question_1, true, 1),
-            new Question(R.string.question_2, false,2),
+            new Question(R.string.question_2, false, 2),
             new Question(R.string.question_3, false, 3),
             new Question(R.string.question_4, false, 4),
             new Question(R.string.question_5, true, 5),
@@ -47,12 +47,12 @@ public class BioQuiz extends AppCompatActivity {
     public int totalCounter = 0;
     public int realTotalCounter;
 
-    private void updateQuestion(){
+    private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
 
-    private void checkAnswer(boolean userPressedTrue){
+    private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
 
         int messageResId = 0;
@@ -80,28 +80,28 @@ public class BioQuiz extends AppCompatActivity {
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         //mQuestionTextView.setVisibility(View.INVISIBLE);
 
-        final TextView tvFinalScore = (TextView)findViewById(R.id.tvFinalScore); //Manipulates final score field
+        final TextView tvFinalScore = (TextView) findViewById(R.id.tvFinalScore); //Manipulates final score field
 
         mTrueButton = (Button) findViewById(R.id.true_button);
-        mTrueButton.setOnClickListener(new View.OnClickListener(){
+        mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 checkAnswer(true);
             }
         });
 
-        mFalseButton= (Button) findViewById(R.id.false_button);
-        mFalseButton.setOnClickListener(new View.OnClickListener(){
+        mFalseButton = (Button) findViewById(R.id.false_button);
+        mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 checkAnswer(false);
             }
         });
 
-        mQ1Button = (Button)findViewById(R.id.q1_button);
-        mQ1Button.setOnClickListener(new View.OnClickListener(){
+        mQ1Button = (Button) findViewById(R.id.q1_button);
+        mQ1Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 mCurrentIndex = 0;
                 int question1 = mQuestionBank[mCurrentIndex].getTextResId();
                 mQuestionTextView.setText(question1);
@@ -109,10 +109,10 @@ public class BioQuiz extends AppCompatActivity {
             }
         });
 
-        mQ2Button = (Button)findViewById(R.id.q2_button);
-        mQ2Button.setOnClickListener(new View.OnClickListener(){
+        mQ2Button = (Button) findViewById(R.id.q2_button);
+        mQ2Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 mCurrentIndex = 1;
                 int question2 = mQuestionBank[mCurrentIndex].getTextResId();
                 mQuestionTextView.setText(question2);
@@ -120,10 +120,10 @@ public class BioQuiz extends AppCompatActivity {
             }
         });
 
-        mQ3Button = (Button)findViewById(R.id.q3_button);
-        mQ3Button.setOnClickListener(new View.OnClickListener(){
+        mQ3Button = (Button) findViewById(R.id.q3_button);
+        mQ3Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 mCurrentIndex = 2;
                 int question3 = mQuestionBank[mCurrentIndex].getTextResId();
                 mQuestionTextView.setText(question3);
@@ -131,10 +131,10 @@ public class BioQuiz extends AppCompatActivity {
             }
         });
 
-        mQ4Button = (Button)findViewById(R.id.q4_button);
-        mQ4Button.setOnClickListener(new View.OnClickListener(){
+        mQ4Button = (Button) findViewById(R.id.q4_button);
+        mQ4Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 mCurrentIndex = 3;
                 int question4 = mQuestionBank[mCurrentIndex].getTextResId();
                 mQuestionTextView.setText(question4);
@@ -142,10 +142,10 @@ public class BioQuiz extends AppCompatActivity {
             }
         });
 
-        mQ5Button = (Button)findViewById(R.id.q5_button);
-        mQ5Button.setOnClickListener(new View.OnClickListener(){
+        mQ5Button = (Button) findViewById(R.id.q5_button);
+        mQ5Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 mCurrentIndex = 4;
                 int question5 = mQuestionBank[mCurrentIndex].getTextResId();
                 mQuestionTextView.setText(question5);
@@ -153,51 +153,50 @@ public class BioQuiz extends AppCompatActivity {
             }
         });
 
-        mSaveButton = (Button)findViewById(R.id.fSave_button);
+        mSaveButton = (Button) findViewById(R.id.fSave_button);
         mSaveButton.setVisibility(View.INVISIBLE);
-        mSaveButton.setOnClickListener(new View.OnClickListener(){
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
             }
         });
 
         mNextButton = (Button) findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener(){
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
 
-                    int lastQuestion = mQuestionBank[mCurrentIndex].getQuestionId();
-                    switch (lastQuestion)
-                    {
-                        case 1:
-                            mQ1Button.setVisibility(View.GONE);
-                            break;
-                        case 2:
-                            mQ2Button.setVisibility(View.GONE);
-                            break;
-                        case 3:
-                            mQ3Button.setVisibility(View.GONE);
-                            break;
-                        case 4:
-                            mQ4Button.setVisibility(View.GONE);
-                            break;
-                        case 5:
-                            mQ5Button.setVisibility(View.GONE);
-                            break;
-                    }
-                    mCurrentIndex = (mCurrentIndex+1) % mQuestionBank.length;
-                    updateQuestion();
-                    nCounter++;
+                int lastQuestion = mQuestionBank[mCurrentIndex].getQuestionId();
+                switch (lastQuestion) {
+                    case 1:
+                        mQ1Button.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        mQ2Button.setVisibility(View.GONE);
+                        break;
+                    case 3:
+                        mQ3Button.setVisibility(View.GONE);
+                        break;
+                    case 4:
+                        mQ4Button.setVisibility(View.GONE);
+                        break;
+                    case 5:
+                        mQ5Button.setVisibility(View.GONE);
+                        break;
+                }
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                updateQuestion();
+                nCounter++;
 
             }
 
         });
 
-        mCheatButton = (Button)findViewById(R.id.cheat_button);
-        mCheatButton.setOnClickListener(new View.OnClickListener(){
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 //start CheatActivity
                 //Intent i = new Intent(BioQuiz.this, CheatActivity.class);
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
@@ -207,15 +206,14 @@ public class BioQuiz extends AppCompatActivity {
             }
         });
 
-        mShowScoreButton = (Button)findViewById(R.id.showscore_button);
-        mShowScoreButton.setOnClickListener(new View.OnClickListener(){
+        mShowScoreButton = (Button) findViewById(R.id.showscore_button);
+        mShowScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                final TextView tvFinalScore = (TextView)findViewById(R.id.tvFinalScore); //Manipulates final score field
+            public void onClick(View v) {
+                final TextView tvFinalScore = (TextView) findViewById(R.id.tvFinalScore); //Manipulates final score field
                 realTotalCounter = totalCounter + nCounter + cCounter;
 
-                if (realTotalCounter >= 5)
-                {
+                if (realTotalCounter >= 5) {
                     //Intent scoreIntent = new Intent(BioQuiz.this, RegisterActivity.class);
                     //BioQuiz.this.startActivity(scoreIntent);
                     tvFinalScore.setText(correctCounter + "");
@@ -227,9 +225,7 @@ public class BioQuiz extends AppCompatActivity {
                     mSaveButton.setVisibility(View.VISIBLE);
                     mQ5Button.setVisibility(View.GONE);
                     mQuestionTextView.setVisibility(View.GONE);
-                }
-                else
-                {
+                } else {
                     int amessageResId = 0;
                     amessageResId = R.string.answertotal_toast;
                     Toast.makeText(BioQuiz.this, amessageResId, Toast.LENGTH_SHORT)
@@ -239,10 +235,10 @@ public class BioQuiz extends AppCompatActivity {
 
         });
 
-        mSaveScoreButton = (Button)findViewById(R.id.fSave_button);
-        mSaveScoreButton.setOnClickListener(new View.OnClickListener(){
+        mSaveScoreButton = (Button) findViewById(R.id.fSave_button);
+        mSaveScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 //IT WORKS; I'm using the sharedpreferences fxn to access the username of the active user
                 SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -253,7 +249,7 @@ public class BioQuiz extends AppCompatActivity {
                 Log.d(TAG, "Inserting attempts...");
                 //IT WORKS; using that record I've pulled up, I'm going to pass the unique email and score into the Scores class
                 //IT WORKS; I'll then take that info and add it into the 'scores' database - I'm saving the score for this attempt
-                db.addScore(new Scores(retrievedUser.getEmail(), correctCounter ));
+                db.addScore(new Scores(retrievedUser.getEmail(), correctCounter));
 
                 //IT WORKS; I'm using the sharedpreferences fxn to access the email of the active user; then store it in a string
                 SharedPreferences sharedPref1 = getSharedPreferences("userInfo1", Context.MODE_PRIVATE);
@@ -268,7 +264,7 @@ public class BioQuiz extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
         }
 
@@ -276,7 +272,7 @@ public class BioQuiz extends AppCompatActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
+    public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);

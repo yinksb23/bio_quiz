@@ -20,7 +20,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         final DatabaseHelper db = new DatabaseHelper(this);
 
-        mShowScores = (Button)findViewById(R.id.bShowScores);
+        mShowScores = (Button) findViewById(R.id.bShowScores);
         mShowScores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

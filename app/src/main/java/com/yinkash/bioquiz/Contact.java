@@ -1,9 +1,5 @@
 package com.yinkash.bioquiz;
 
-/**
- * Created by yinksb23 on 13/12/2016.
- */
-
 public class Contact {
 
     String name, email, uname, pass;
@@ -18,43 +14,35 @@ public class Contact {
         this.name = name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return this.email;
     }
 
-    public void setUname(String uname)
-    {
+    public void setUname(String uname) {
         this.uname = uname;
     }
 
-    public String getUname()
-    {
+    public String getUname() {
         return this.uname;
     }
 
-    public void setPass(String pass)
-    {
+    public void setPass(String pass) {
         this.pass = pass;
     }
 
-    public String getPass()
-    {
+    public String getPass() {
         return this.pass;
     }
 }
