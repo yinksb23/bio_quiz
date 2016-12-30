@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TheBioQuiz</string>
+    <string name="app_name">BioQuiz</string>
     <string name="login">login</string>
     <string name="true_button">true_button</string>
     <string name="TRUE">TRUE</string>

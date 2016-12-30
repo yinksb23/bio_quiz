@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.yinksb23.thebioquiz.LeaderboardActivity">
+    tools:context="com.yinkash.bioquiz.thebioquiz.LeaderboardActivity">
 
     <TextView
         android:text="ScoreBoard"

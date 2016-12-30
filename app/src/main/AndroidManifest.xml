@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.yinksb23.thebioquiz">
+          package="com.yinkash.bioquiz">
 
     <application
         android:allowBackup="true"
@@ -8,22 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.yinkash.bioquiz.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".BioQuiz">
+        <activity android:name="com.yinkash.bioquiz.BioQuiz">
         </activity>
-        <activity android:name=".CheatActivity">
+        <activity android:name="com.yinkash.bioquiz.CheatActivity">
         </activity>
-        <activity android:name=".RegisterActivity">
+        <activity android:name="com.yinkash.bioquiz.RegisterActivity">
         </activity>
-        <activity android:name=".UserWelcomeActivity">
+        <activity android:name="com.yinkash.bioquiz.UserWelcomeActivity">
         </activity>
-        <activity android:name=".LeaderboardActivity">
+        <activity android:name="com.yinkash.bioquiz.LeaderboardActivity">
         </activity>
     </application>
 
