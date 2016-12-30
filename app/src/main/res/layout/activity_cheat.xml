@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.yinksb23.thebioquiz.CheatActivity">
+    tools:context="com.yinkash.bioquiz.thebioquiz.CheatActivity">
 
     <TextView
         android:layout_width="wrap_content"
