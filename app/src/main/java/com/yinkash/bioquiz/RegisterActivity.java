@@ -38,11 +38,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 //If the two entered passwords fail to match, the code below is executed
-                if(!passwordstr.equals(password2str)){
+                if (!passwordstr.equals(password2str)) {
                     //pop up msg
                     Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                }
-                else //If the passwords do match, the UserInput is stored in the Contact class
+                } else //If the passwords do match, the UserInput is stored in the Contact class
                 {
                     //Here we will set the Contact details to that entered by the user
                     Contact c = new Contact();

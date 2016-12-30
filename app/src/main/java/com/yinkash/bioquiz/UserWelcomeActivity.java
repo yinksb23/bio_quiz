@@ -15,9 +15,9 @@ public class UserWelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_welcome);
 
-        final EditText etUserName = (EditText)findViewById(R.id.etUserName);
-        final TextView welcomeMessage = (TextView)findViewById(R.id.tvWelcomeMSG);
-        final Button bStartQuiz = (Button)findViewById(R.id.bStartQ);
+        final EditText etUserName = (EditText) findViewById(R.id.etUserName);
+        final TextView welcomeMessage = (TextView) findViewById(R.id.tvWelcomeMSG);
+        final Button bStartQuiz = (Button) findViewById(R.id.bStartQ);
 
         String username = getIntent().getStringExtra("Username"); //need to explain this line
 
@@ -26,14 +26,12 @@ public class UserWelcomeActivity extends AppCompatActivity {
         tv.setText(username); //This textbox is then set to display the user's Username
 
         //Clicking on this button starts the Biology quiz
-        bStartQuiz.setOnClickListener(new View.OnClickListener(){
+        bStartQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Intent startquizIntent = new Intent(UserWelcomeActivity.this, BioQuiz.class);
                 UserWelcomeActivity.this.startActivity(startquizIntent);
             }
         });
-
     }
 }
