@@ -1,4 +1,4 @@
-package com.yinkash.bioquiz;
+package com.yinkash.bioquiz.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.yinkash.bioquiz.R;
 
 public class CheatActivity extends AppCompatActivity {
 

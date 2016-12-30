@@ -1,4 +1,4 @@
-package com.yinkash.bioquiz;
+package com.yinkash.bioquiz.controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.yinkash.bioquiz.DatabaseHelper;
+import com.yinkash.bioquiz.R;
+import com.yinkash.bioquiz.models.Contact;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -47,8 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Contact c = new Contact();
                     c.setName(namestr);
                     c.setEmail(emailstr);
-                    c.setUname(usernamestr);
-                    c.setPass(passwordstr);
+                    c.setUserName(usernamestr);
+                    c.setPassword(passwordstr);
 
                     /*The Contact class is then passed to the DatabaseHelper class for injection into the database*/
                     helper.insertContact(c);
