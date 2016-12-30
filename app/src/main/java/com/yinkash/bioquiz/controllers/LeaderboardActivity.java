@@ -1,10 +1,14 @@
-package com.yinkash.bioquiz;
+package com.yinkash.bioquiz.controllers;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.yinkash.bioquiz.DatabaseHelper;
+import com.yinkash.bioquiz.R;
+import com.yinkash.bioquiz.models.Score;
 
 import java.util.ArrayList;
 
@@ -27,10 +31,10 @@ public class LeaderboardActivity extends AppCompatActivity {
 
                 // Reading all attempts
                 Log.d(TAG, "Reading all attempts...");
-                ArrayList<Scores> scores = db.getAllScores();
+                ArrayList<Score> scores = db.getAllScores();
 
-                for (Scores score : scores) {
-                    String log = "Name: " + score.getUname1() + " , Score: " + score.getSavedScore();
+                for (Score score : scores) {
+                    String log = "Name: " + score.getUserName() + " , Score: " + score.getSavedScore();
                     // Writing attempts to log
                     Log.d(TAG, log);
                 }

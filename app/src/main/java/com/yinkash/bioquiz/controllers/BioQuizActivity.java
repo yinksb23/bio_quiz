@@ -1,4 +1,4 @@
-package com.yinkash.bioquiz;
+package com.yinkash.bioquiz.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class BioQuiz extends AppCompatActivity {
+import com.yinkash.bioquiz.DatabaseHelper;
+import com.yinkash.bioquiz.R;
+import com.yinkash.bioquiz.models.Contact;
+import com.yinkash.bioquiz.models.Question;
+import com.yinkash.bioquiz.models.Score;
+
+public class BioQuizActivity extends AppCompatActivity {
 
     private static final String TAG = "BioQuizActivity";
     private static final String KEY_INDEX = "index";
@@ -198,9 +204,9 @@ public class BioQuiz extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //start CheatActivity
-                //Intent i = new Intent(BioQuiz.this, CheatActivity.class);
+                //Intent i = new Intent(BioQuizActivity.this, CheatActivity.class);
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
-                Intent i = CheatActivity.newIntent(BioQuiz.this, answerIsTrue);
+                Intent i = CheatActivity.newIntent(BioQuizActivity.this, answerIsTrue);
                 startActivity(i);
                 cCounter++;
             }
@@ -214,8 +220,8 @@ public class BioQuiz extends AppCompatActivity {
                 realTotalCounter = totalCounter + nCounter + cCounter;
 
                 if (realTotalCounter >= 5) {
-                    //Intent scoreIntent = new Intent(BioQuiz.this, RegisterActivity.class);
-                    //BioQuiz.this.startActivity(scoreIntent);
+                    //Intent scoreIntent = new Intent(BioQuizActivity.this, RegisterActivity.class);
+                    //BioQuizActivity.this.startActivity(scoreIntent);
                     tvFinalScore.setText(correctCounter + "");
                     //Need to add code here which inputs the Final Score into
                     mNextButton.setVisibility(View.GONE);
@@ -228,7 +234,7 @@ public class BioQuiz extends AppCompatActivity {
                 } else {
                     int amessageResId = 0;
                     amessageResId = R.string.answertotal_toast;
-                    Toast.makeText(BioQuiz.this, amessageResId, Toast.LENGTH_SHORT)
+                    Toast.makeText(BioQuizActivity.this, amessageResId, Toast.LENGTH_SHORT)
                             .show();
                 }
             }
@@ -247,9 +253,9 @@ public class BioQuiz extends AppCompatActivity {
                 //IT WORKS; using the username stored in spUname I can the pull up the specific record associated with said user
                 Contact retrievedUser = db.getContact(spUname);
                 Log.d(TAG, "Inserting attempts...");
-                //IT WORKS; using that record I've pulled up, I'm going to pass the unique email and score into the Scores class
+                //IT WORKS; using that record I've pulled up, I'm going to pass the unique email and score into the Score class
                 //IT WORKS; I'll then take that info and add it into the 'scores' database - I'm saving the score for this attempt
-                db.addScore(new Scores(retrievedUser.getEmail(), correctCounter));
+                db.addScore(new Score(retrievedUser.getEmail(), correctCounter));
 
                 //IT WORKS; I'm using the sharedpreferences fxn to access the email of the active user; then store it in a string
                 SharedPreferences sharedPref1 = getSharedPreferences("userInfo1", Context.MODE_PRIVATE);

@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.yinkash.bioquiz.models.Contact;
+import com.yinkash.bioquiz.models.Score;
+
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -64,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
 
         //Verify there are no two users with the same Username
-        boolean CONTACT_NOT_ADDED = !doesContactExist(c.getUname());
+        boolean CONTACT_NOT_ADDED = !doesContactExist(c.getUserName());
 
         if (CONTACT_NOT_ADDED) {
             ContentValues values = new ContentValues();
@@ -76,14 +79,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(COLUMN_ID, count);
             values.put(COLUMN_NAME, c.getName());
             values.put(COLUMN_EMAIL, c.getEmail());
-            values.put(COLUMN_UNAME, c.getUname());
-            values.put(COLUMN_PASS, c.getPass());
+            values.put(COLUMN_UNAME, c.getUserName());
+            values.put(COLUMN_PASS, c.getPassword());
 
             db.insert(TABLE_NAME, null, values);
             db.close();
         } else {
 
-            Log.d(TAG, "addUser: " + c.getUname() + " already exists in the database.");
+            Log.d(TAG, "addUser: " + c.getUserName() + " already exists in the database.");
         }
     }
 
@@ -120,9 +123,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Contact contact = new Contact();
-                contact.setUname(cursor.getString(1));
+                contact.setUserName(cursor.getString(1));
                 contact.setEmail(cursor.getString(2));
-                contact.setPass(cursor.getString(3));
+                contact.setPassword(cursor.getString(3));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
@@ -147,32 +150,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_UNAME, contact.getUname());
+        values.put(COLUMN_UNAME, contact.getUserName());
         values.put(COLUMN_EMAIL, contact.getEmail());
-        values.put(COLUMN_PASS, contact.getPass());
+        values.put(COLUMN_PASS, contact.getPassword());
 
         // updating row
         return db.update(TABLE_NAME, values, COLUMN_UNAME + " = ?",
-                new String[]{contact.getUname()});
+                new String[]{contact.getUserName()});
     }
 
     // Deleting a user
     public void deleteContact(Contact contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_UNAME + " = ?",
-                new String[]{contact.getUname()});
+                new String[]{contact.getUserName()});
         db.close();
     }
 
     // Adding a new score
-    public void addScore(Scores score) {
+    public void addScore(Score score) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        boolean IS_VALID_ATTEMPT = !doesContactExist(score.getUname1());
+        boolean IS_VALID_ATTEMPT = !doesContactExist(score.getUserName());
 
         if (IS_VALID_ATTEMPT) {
             ContentValues values = new ContentValues();
-            values.put(COLUMN_EMAIL, score.getUname1()); // Username
+            values.put(COLUMN_EMAIL, score.getUserName()); // Username
             values.put(COLUMN_SCORE, score.getSavedScore()); // User score
 
             // Inserting Row
@@ -186,8 +189,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting All Attempts
-    public ArrayList<Scores> getAllScores() {
-        ArrayList<Scores> scoresList = new ArrayList<>();
+    public ArrayList<Score> getAllScores() {
+        ArrayList<Score> scoresList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_SCORES;
 
@@ -197,8 +200,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Scores score = new Scores();
-                score.setUname1(cursor.getString(1));
+                Score score = new Score();
+                score.setUserName(cursor.getString(1));
                 score.setSavedScore(cursor.getInt(2));
                 // Adding contact to list
                 scoresList.add(score);
@@ -253,7 +256,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int cScore = c.getColumnIndex(COLUMN_SCORE);
 
         for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-            result = result + "Scores for user " + testUname + " " + c.getString(2) + "\n";
+            result = result + "Score for user " + testUname + " " + c.getString(2) + "\n";
         }
 
         c.close();

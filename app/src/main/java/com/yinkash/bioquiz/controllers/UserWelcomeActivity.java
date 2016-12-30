@@ -1,4 +1,4 @@
-package com.yinkash.bioquiz;
+package com.yinkash.bioquiz.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.yinkash.bioquiz.R;
 
 public class UserWelcomeActivity extends AppCompatActivity {
 
@@ -29,7 +31,7 @@ public class UserWelcomeActivity extends AppCompatActivity {
         bStartQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startquizIntent = new Intent(UserWelcomeActivity.this, BioQuiz.class);
+                Intent startquizIntent = new Intent(UserWelcomeActivity.this, BioQuizActivity.class);
                 UserWelcomeActivity.this.startActivity(startquizIntent);
             }
         });

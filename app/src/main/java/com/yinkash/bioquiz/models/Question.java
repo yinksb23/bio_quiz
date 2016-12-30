@@ -1,4 +1,4 @@
-package com.yinkash.bioquiz;
+package com.yinkash.bioquiz.models;
 
 public class Question {
 

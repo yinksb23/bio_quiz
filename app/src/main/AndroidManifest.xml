@@ -8,22 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.yinkash.bioquiz.LoginActivity">
+        <activity android:name="com.yinkash.bioquiz.controllers.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.yinkash.bioquiz.BioQuiz">
+        <activity android:name="com.yinkash.bioquiz.controllers.BioQuizActivity">
         </activity>
-        <activity android:name="com.yinkash.bioquiz.CheatActivity">
+        <activity android:name="com.yinkash.bioquiz.controllers.CheatActivity">
         </activity>
-        <activity android:name="com.yinkash.bioquiz.RegisterActivity">
+        <activity android:name="com.yinkash.bioquiz.controllers.RegisterActivity">
         </activity>
-        <activity android:name="com.yinkash.bioquiz.UserWelcomeActivity">
+        <activity android:name="com.yinkash.bioquiz.controllers.UserWelcomeActivity">
         </activity>
-        <activity android:name="com.yinkash.bioquiz.LeaderboardActivity">
+        <activity android:name="com.yinkash.bioquiz.controllers.LeaderboardActivity">
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.yinkash.bioquiz;
+package com.yinkash.bioquiz.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yinkash.bioquiz.DatabaseHelper;
+import com.yinkash.bioquiz.R;
+import com.yinkash.bioquiz.models.Contact;
 
 public class LoginActivity extends AppCompatActivity {
 
