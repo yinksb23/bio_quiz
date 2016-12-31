@@ -20,6 +20,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="correct_toast">Correct</string>
     <string name="incorrect_toast">Incorrect</string>
-    <string name="answertotal_toast">You must answer all questions before you can see your score!</string>
+    <string name="answertotal_toast">You must answer all questions before you can see your result!</string>
     <string name="save_score">SAVE SCORE</string>
 </resources>

@@ -1,20 +1,29 @@
 package com.yinkash.bioquiz.models;
 
-public class Contact {
+public class User {
 
+    private int id;
     private String name;
     private String email;
     private String userName;
     private String password;
 
-    public Contact() {
+    public User() {
     }
 
-    public Contact(String name, String email, String userName, String password) {
+    public User(String name, String email, String userName, String password) {
         this.name = name;
         this.email = email;
         this.userName = userName;
         this.password = password;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public void setName(String name) {

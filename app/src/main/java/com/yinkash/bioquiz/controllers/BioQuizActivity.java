@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.yinkash.bioquiz.DatabaseHelper;
 import com.yinkash.bioquiz.R;
-import com.yinkash.bioquiz.models.Contact;
+import com.yinkash.bioquiz.models.Result;
+import com.yinkash.bioquiz.models.User;
 import com.yinkash.bioquiz.models.Question;
-import com.yinkash.bioquiz.models.Score;
+
+import java.util.ArrayList;
 
 public class BioQuizActivity extends AppCompatActivity {
 
@@ -223,7 +225,7 @@ public class BioQuizActivity extends AppCompatActivity {
                     //Intent scoreIntent = new Intent(BioQuizActivity.this, RegisterActivity.class);
                     //BioQuizActivity.this.startActivity(scoreIntent);
                     tvFinalScore.setText(correctCounter + "");
-                    //Need to add code here which inputs the Final Score into
+                    //Need to add code here which inputs the Final Result into
                     mNextButton.setVisibility(View.GONE);
                     mFalseButton.setVisibility(View.GONE);
                     mTrueButton.setVisibility(View.GONE);
@@ -251,21 +253,25 @@ public class BioQuizActivity extends AppCompatActivity {
                 String spUname = sharedPref.getString("username", "");
 
                 //IT WORKS; using the username stored in spUname I can the pull up the specific record associated with said user
-                Contact retrievedUser = db.getContact(spUname);
+                User retrievedUser = db.getUserByUserName(spUname);
                 Log.d(TAG, "Inserting attempts...");
-                //IT WORKS; using that record I've pulled up, I'm going to pass the unique email and score into the Score class
+                //IT WORKS; using that record I've pulled up, I'm going to pass the unique email and score into the Result class
                 //IT WORKS; I'll then take that info and add it into the 'scores' database - I'm saving the score for this attempt
-                db.addScore(new Score(retrievedUser.getEmail(), correctCounter));
+                db.createResult(new Result(retrievedUser.getId(), correctCounter));
+
+                Intent intent = new Intent(BioQuizActivity.this, LeaderboardActivity.class);
+                startActivity(intent);
 
                 //IT WORKS; I'm using the sharedpreferences fxn to access the email of the active user; then store it in a string
-                SharedPreferences sharedPref1 = getSharedPreferences("userInfo1", Context.MODE_PRIVATE);
-                String spEmail = sharedPref1.getString("email", "");
+//                SharedPreferences sharedPref1 = getSharedPreferences("userInfo1", Context.MODE_PRIVATE);
+//                String spEmail = sharedPref1.getString("email", "");
 
                 //Being tested; IT FUCKING WORKS!
-                Log.d(TAG, "Returning Ayo's scores...");
+//                Log.d(TAG, "Returning Ayo's scores...");
                 //IT WORKS; I'm then passing the active user's email and uname into the publishLeaderboard method
-                String ayo2 = db.publishLeaderboard(spEmail, spUname);
-                Log.d(TAG, ayo2);
+
+                //String ayo2 = db.publishLeaderboard(spEmail, spUname);
+                //Log.d(TAG, ayo2);
 
             }
         });

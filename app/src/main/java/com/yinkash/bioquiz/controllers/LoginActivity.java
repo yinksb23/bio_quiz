@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.yinkash.bioquiz.DatabaseHelper;
 import com.yinkash.bioquiz.R;
-import com.yinkash.bioquiz.models.Contact;
+import com.yinkash.bioquiz.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,14 +35,15 @@ public class LoginActivity extends AppCompatActivity {
         /*In the event the user has not registered before, by clicking on the Register Here link
         the user will switch Activity from the Login Activity to the Register Activity wi*/
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*create an Intent; this intent will allow us to transition from the Login Activity to
-                the Register Activity in the event this is the User's first interaction
-                 */
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
 
+            @Override
+            /**
+             * create an Intent; this intent will allow us to transition from the Login Activity to
+             * the Register Activity
+             */
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
             }
         });
 
@@ -52,28 +53,26 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //store the entered UserName as a string
-                String str = etUserName.getText().toString();
+                String inputtedUserName = etUserName.getText().toString();
                 //store the entered password as a string; this is the password entered into the Login form
-                String pass = etPassword.getText().toString();
+                String inputtedPassword = etPassword.getText().toString();
 
-                //this line invokes a method which retrieves the corresponding password for a given UserName
-                String password = helper.searchPass(str);
+                User currentUser = helper.getUserByUserName(inputtedUserName);
 
-                //this loop will then compare the password entered into the Login form with the password retrieved
-                if (pass.equals(password)) {
+                if (inputtedPassword.equals(currentUser.getPassword())) {
                     //if the password entered and the password retrieved match, the user will be taken to the Welcome activity
                     Intent uWelcomeIntent = new Intent(LoginActivity.this, UserWelcomeActivity.class);
-                    uWelcomeIntent.putExtra("Username", str);
-                    LoginActivity.this.startActivity((uWelcomeIntent));
+                    uWelcomeIntent.putExtra("Username", currentUser.getUserName());
+                    startActivity(uWelcomeIntent);
 
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("username", str);
+                    editor.putString("username", inputtedUserName);
                     editor.apply();
 
                     //Obtain the information of the player;Access and store their email address
 
-                    Contact retrievedUser = helper.getContact(str);
+                    User retrievedUser = helper.getUserByUserName(inputtedUserName);
                     String activeEmail = retrievedUser.getEmail();
 
                     SharedPreferences sharedPref1 = getSharedPreferences("userInfo1", Context.MODE_PRIVATE);
@@ -83,12 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     //if the password entered and the password retrieved do no match an error message is produced
                     Toast.makeText(LoginActivity.this, "Username and password do not match", Toast.LENGTH_SHORT).show();
-
                 }
-
             }
         });
-
 
     }
 }
