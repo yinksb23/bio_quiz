@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.yinkash.bioquiz.DatabaseHelper;
 import com.yinkash.bioquiz.R;
-import com.yinkash.bioquiz.models.Contact;
+import com.yinkash.bioquiz.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,17 +45,17 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!passwordstr.equals(password2str)) {
                     //pop up msg
                     Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                } else //If the passwords do match, the UserInput is stored in the Contact class
+                } else //If the passwords do match, the UserInput is stored in the User class
                 {
-                    //Here we will set the Contact details to that entered by the user
-                    Contact c = new Contact();
+                    //Here we will set the User details to that entered by the user
+                    User c = new User();
                     c.setName(namestr);
                     c.setEmail(emailstr);
                     c.setUserName(usernamestr);
                     c.setPassword(passwordstr);
 
-                    /*The Contact class is then passed to the DatabaseHelper class for injection into the database*/
-                    helper.insertContact(c);
+                    /*The User class is then passed to the DatabaseHelper class for injection into the database*/
+                    helper.createUser(c);
                 }
 
             }

@@ -2,20 +2,17 @@ package com.yinkash.bioquiz.controllers;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.yinkash.bioquiz.DatabaseHelper;
 import com.yinkash.bioquiz.R;
-import com.yinkash.bioquiz.models.Score;
+import com.yinkash.bioquiz.models.Result;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LeaderboardActivity extends AppCompatActivity {
-
-    private static final String TAG = "COMP211P";
-    private Button mShowScores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +21,22 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         final DatabaseHelper db = new DatabaseHelper(this);
 
-        mShowScores = (Button) findViewById(R.id.bShowScores);
-        mShowScores.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        List<Result> resultList = db.getAllResults();
 
-                // Reading all attempts
-                Log.d(TAG, "Reading all attempts...");
-                ArrayList<Score> scores = db.getAllScores();
+        List<String> formattedList = new ArrayList<>();
+        for (Result result : resultList) {
+            formattedList.add(
+                String.format("%s %s", db.getUserById(result.getUserId()).getName(), result.getScore())
+            );
+        }
 
-                for (Score score : scores) {
-                    String log = "Name: " + score.getUserName() + " , Score: " + score.getSavedScore();
-                    // Writing attempts to log
-                    Log.d(TAG, log);
-                }
+        ListView results = (ListView) findViewById(R.id.lvLeaderboard);
+        ArrayAdapter adapter = new ArrayAdapter<>(
+                this,
+                R.layout.activity_listview,
+                formattedList.toArray()
+        );
 
-            }
-        });
+        results.setAdapter(adapter);
     }
 }

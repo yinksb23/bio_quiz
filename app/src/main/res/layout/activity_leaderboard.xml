@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.yinkash.bioquiz.thebioquiz.LeaderboardActivity">
+    tools:context="com.yinkash.bioquiz.controllers.LeaderboardActivity">
 
     <TextView
         android:text="ScoreBoard"
@@ -22,13 +22,11 @@
         tools:text="ScoreBoard"
         tools:ignore="HardcodedText"/>
 
-    <Button
-        android:text="SHOW SCORES"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="140dp"
-        android:id="@+id/bShowScores"
-        tools:ignore="HardcodedText"/>
+        android:id="@+id/lvLeaderboard" />
+
 </RelativeLayout>
