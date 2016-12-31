@@ -209,37 +209,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return results;
     }
-
-//    public String publishLeaderboard(String testEmail1, String testUname1) {
-//
-//        //IT WORKS
-//        String testUname = testUname1;
-//        String testEmail = testEmail1;
-//        db = this.getReadableDatabase();
-//
-//        Cursor c = db.query(
-//                TABLE_SCORES,
-//                null,
-//                String.format("%s = '%s'", COLUMN_EMAIL, testEmail),
-//                null,
-//                null,
-//                null,
-//                COLUMN_SCORE + " DESC"
-//        );
-//
-//        String result = "";
-//
-//        int cID = c.getColumnIndex(COLUMN_ID);
-//        int cEmail = c.getColumnIndex(COLUMN_EMAIL);
-//        int cScore = c.getColumnIndex(COLUMN_SCORE);
-//
-//        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-//            result = result + "Result for user " + testUname + " " + c.getString(2) + "\n";
-//        }
-//
-//        c.close();
-//        db.close();
-//        return result;
-//    }
-
 }
