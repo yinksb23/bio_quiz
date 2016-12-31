@@ -183,15 +183,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Getting All Results
-    public ArrayList<Result> getAllResults() {
+    // Getting All Results By User Id
+    public ArrayList<Result> getAllResultsByUserId(Integer userId) {
         ArrayList<Result> results = new ArrayList<>();
 
-        // Select All Query
-        String selectQuery = "SELECT * FROM " + TABLE_SCORES;
-
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.query(
+                TABLE_SCORES,
+                null,
+                COLUMN_USER_ID + " = ?",
+                new String[]{userId.toString()},
+                null,
+                null,
+                null,
+                null
+        );
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

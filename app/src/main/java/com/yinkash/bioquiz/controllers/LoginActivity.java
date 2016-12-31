@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 User currentUser = helper.getUserByUserName(inputtedUserName);
 
-                if (inputtedPassword.equals(currentUser.getPassword())) {
+                if (currentUser != null && inputtedPassword.equals(currentUser.getPassword())) {
                     //if the password entered and the password retrieved match, the user will be taken to the Welcome activity
                     Intent uWelcomeIntent = new Intent(LoginActivity.this, UserWelcomeActivity.class);
                     uWelcomeIntent.putExtra("Username", currentUser.getUserName());
@@ -67,18 +67,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("username", inputtedUserName);
+                    editor.putInt("userId", currentUser.getId());
+                    editor.putString("username", currentUser.getUserName());
                     editor.apply();
 
-                    //Obtain the information of the player;Access and store their email address
-
-                    User retrievedUser = helper.getUserByUserName(inputtedUserName);
-                    String activeEmail = retrievedUser.getEmail();
-
-                    SharedPreferences sharedPref1 = getSharedPreferences("userInfo1", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor1 = sharedPref1.edit();
-                    editor1.putString("email", activeEmail);
-                    editor1.apply();
                 } else {
                     //if the password entered and the password retrieved do no match an error message is produced
                     Toast.makeText(LoginActivity.this, "Username and password do not match", Toast.LENGTH_SHORT).show();
