@@ -11,6 +11,7 @@ import com.yinkash.bioquiz.models.User;
 import com.yinkash.bioquiz.models.Result;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -33,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
 
+    private static final String COLUMN_CREATED_ON = "createdon";
     private static final String COLUMN_USER_ID = "userid";
     private static final String COLUMN_SCORE = "score";
 
@@ -64,9 +66,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String.format("CREATE TABLE %s (" +
                                 "%s integer primary key," +
                                 "%s text," +
+                                "%s text," +
                                 "%s text);)",
                         TABLE_SCORES,
                         COLUMN_ID,
+                        COLUMN_CREATED_ON,
                         COLUMN_USER_ID,
                         COLUMN_SCORE
                 );
@@ -150,7 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Creates a new user
-    public void createUser(User user) {
+    public void saveUser(User user) {
         if (getUserByUserName(user.getUserName()) == null) {
             db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -167,12 +171,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Create a new result
-    public void createResult(Result result) {
+    // Save a new result
+    public void saveResult(Result result) {
         if (getUserById(result.getUserId()) != null) {
 
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
+            values.put(COLUMN_CREATED_ON, result.getCreatedOn());
             values.put(COLUMN_USER_ID, result.getUserId());
             values.put(COLUMN_SCORE, result.getScore());
 
@@ -207,6 +212,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     cursor.getInt(cursor.getColumnIndex(COLUMN_SCORE))
                 );
                 result.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+                result.setCreatedOn(cursor.getString(cursor.getColumnIndex(COLUMN_CREATED_ON)));
                 results.add(result);
             } while (cursor.moveToNext());
         }

@@ -1,40 +1,50 @@
 package com.yinkash.bioquiz.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Result {
 
-    private int id;
-    private int userId;
-    private int score;
+    private Integer id;
+    private String createdOn;
+    private Integer userId;
+    private Integer score;
 
-    public Result() {
-    }
-
-    public Result(int userId, int score) {
+    public Result(Integer userId, Integer score) {
         this.userId = userId;
         this.score = score;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setUserId(int userId) {
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getCreatedOn() {
+        return this.createdOn;
+    }
+
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return this.score;
     }
 }

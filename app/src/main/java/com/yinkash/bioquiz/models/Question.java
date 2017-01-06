@@ -2,38 +2,38 @@ package com.yinkash.bioquiz.models;
 
 public class Question {
 
-    private int mTextResId;
-    private boolean mAnswerTrue;
-    private int mQuestionId;
+    private Integer id;
+    private String questionString;
+    private boolean answer;
 
-    public Question(int textResId, boolean answerTrue, int qID) {
-        mTextResId = textResId;
-        mAnswerTrue = answerTrue;
-        mQuestionId = qID;
+    public Question(Integer id, String questionString, boolean answer) {
+        this.id = id;
+        this.questionString = questionString;
+        this.answer = answer;
     }
 
-    public int getTextResId() {
-        return mTextResId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setTextResId(int textResId) {
-        mTextResId = textResId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public boolean isAnswerTrue() {
-        return mAnswerTrue;
+    public String getQuestionString() {
+        return questionString;
     }
 
-    public void setAnswerTrue(boolean answerTrue) {
-        mAnswerTrue = answerTrue;
+    public void setQuestionString(String questionString) {
+        this.questionString = questionString;
     }
 
-    public int getQuestionId() {
-        return mQuestionId;
+    public boolean getAnswer() {
+        return answer;
     }
 
-    public void setQuestionId(int qId) {
-        mQuestionId = qId;
+    public void setAnswer(boolean answer) {
+        this.answer = answer;
     }
 
 }
