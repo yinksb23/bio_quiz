@@ -2,7 +2,7 @@ package com.yinkash.bioquiz.models;
 
 public class User {
 
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String userName;
@@ -18,11 +18,11 @@ public class User {
         this.password = password;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 

@@ -3,15 +3,11 @@
     <string name="login">login</string>
     <string name="true_button">true_button</string>
     <string name="TRUE">TRUE</string>
+    <string name="skip_button">SKIP</string>
     <string name="false_button">FALSE</string>
     <string name="cheat_button">CHEAT</string>
     <string name="next_button">NEXT</string>
-    <string name="question_1">Insert Question 1</string>
-    <string name="question_2">Insert Question 2</string>
-    <string name="question_3">Insert Question 3</string>
-    <string name="question_4">Insert Question 4</string>
-    <string name="question_5">Insert Question 5</string>
-    <string name="finalscore">FinalScore</string>
+    <string name="final_score">FinalScore</string>
     <string name="warning_text">Are you sure?</string>
     <string name="show_answer_button">Show Answer</string>
     <string name="register">Register</string>

@@ -10,9 +10,10 @@ import android.widget.ListView;
 import com.yinkash.bioquiz.DatabaseHelper;
 import com.yinkash.bioquiz.R;
 import com.yinkash.bioquiz.models.Result;
-import com.yinkash.bioquiz.models.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class LeaderboardActivity extends AppCompatActivity {
@@ -27,13 +28,18 @@ public class LeaderboardActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         Integer currentUserId = sharedPref.getInt("userId", -1);
 
-        User currentUser = db.getUserById(currentUserId);
         List<Result> resultList = db.getAllResultsByUserId(currentUserId);
+        Collections.sort(resultList, Collections.reverseOrder(new Comparator<Result>() {
+            @Override
+            public int compare(Result o1, Result o2) {
+                return o1.getScore().compareTo(o2.getScore());
+            }
+        }));
 
         List<String> formattedList = new ArrayList<>();
         for (Result result : resultList) {
             formattedList.add(
-                String.format("%s %s", currentUser.getName(), result.getScore())
+                String.format("%s        %s", result.getCreatedOn(), result.getScore())
             );
         }
 

@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                     c.setPassword(passwordstr);
 
                     /*The User class is then passed to the DatabaseHelper class for injection into the database*/
-                    helper.createUser(c);
+                    helper.saveUser(c);
                 }
 
             }
