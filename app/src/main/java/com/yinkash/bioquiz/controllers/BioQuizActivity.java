@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +22,9 @@ import com.yinkash.bioquiz.models.Question;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BioQuizActivity extends AppCompatActivity {
 
@@ -31,13 +36,14 @@ public class BioQuizActivity extends AppCompatActivity {
     private TextView mQuestionStringTextView;
     private TextView mQuestionNumberTextView;
     private TextView mScoreTextView;
+    private ListView mQuestionListView;
 
     private Question[] mQuestionBank = new Question[]{
-            new Question(1, "Insert Question 1", true),
-            new Question(2, "Insert Question 2", false),
-            new Question(3, "Insert Question 3", false),
-            new Question(4, "Insert Question 4", false),
-            new Question(5, "Insert Question 5", true),
+            new Question(0, "Is the sky blue?", true),
+            new Question(1, "Are dogs reptiles?", false),
+            new Question(2, "Can plants photosynthesise?", true),
+            new Question(3, "Are sharks fish?", true),
+            new Question(4, "The atmosphere is made up of 42% Oxygen", false),
     };
 
     private int currentQuestionId = 0;
@@ -54,6 +60,33 @@ public class BioQuizActivity extends AppCompatActivity {
         mQuestionStringTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionNumberTextView = (TextView) findViewById(R.id.question_number_text_view);
         mScoreTextView = (TextView) findViewById(R.id.score_text_view);
+        mQuestionListView = (ListView) findViewById(R.id.lvQuestionList);
+
+        // Extract all question strings from array
+        List<String> questionStrings = new ArrayList<>();
+        for (Question question : mQuestionBank) {
+            questionStrings.add(question.getQuestionString());
+        }
+
+        // Add questionStrings to list view
+        ArrayAdapter adapter = new ArrayAdapter<>(
+                this,
+                R.layout.activity_listview,
+                questionStrings.toArray()
+        );
+        mQuestionListView.setAdapter(adapter);
+
+        // On question select, update current question
+        mQuestionListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+                if (mQuestionListView.getChildAt(position).isEnabled()) {
+                    setQuestion(mQuestionBank[position]);
+                }
+            }
+        });
 
         Button trueButton = (Button) findViewById(R.id.true_button);
         trueButton.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +113,6 @@ public class BioQuizActivity extends AppCompatActivity {
                 totalSkipped++;
                 nextQuestion();
             }
-
         });
 
         Button cheatButton = (Button) findViewById(R.id.cheat_button);
@@ -110,18 +142,27 @@ public class BioQuizActivity extends AppCompatActivity {
     }
 
     private void setQuestion(Question question) {
+        currentQuestionId = question.getId();
         mQuestionStringTextView.setText(question.getQuestionString());
-        mQuestionNumberTextView.setText(String.format("Question %d/%d", question.getId(), mQuestionBank.length));
+        mQuestionNumberTextView.setText(String.format("Question %d/%d", question.getId() + 1, mQuestionBank.length));
         mScoreTextView.setText(String.format("Score: %d", score));
     }
 
     private void nextQuestion() {
-        currentQuestionId = (currentQuestionId + 1) % mQuestionBank.length;
-        setQuestion(mQuestionBank[currentQuestionId]);
+        mQuestionListView.getChildAt(currentQuestionId).setEnabled(false);
+        mQuestionListView.getChildAt(currentQuestionId).setClickable(false);
 
         int totalCompleted = (totalAnswered + totalSkipped + totalCheated);
         if (totalCompleted == mQuestionBank.length) {
             saveScore();
+        } else {
+            int nextAvailableQuestion = currentQuestionId;
+
+            while (!mQuestionListView.getChildAt(nextAvailableQuestion).isEnabled()) {
+                nextAvailableQuestion = (nextAvailableQuestion + 1) % mQuestionBank.length;
+                mQuestionListView.setNextFocusDownId(nextAvailableQuestion);
+            }
+            setQuestion(mQuestionBank[nextAvailableQuestion]);
         }
     }
 
