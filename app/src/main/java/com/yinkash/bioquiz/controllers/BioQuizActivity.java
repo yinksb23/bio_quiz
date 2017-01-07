@@ -65,7 +65,7 @@ public class BioQuizActivity extends AppCompatActivity {
         // Extract all question strings from array
         List<String> questionStrings = new ArrayList<>();
         for (Question question : mQuestionBank) {
-            questionStrings.add(question.getQuestionString());
+            questionStrings.add("Question "+ (question.getId()+1));
         }
 
         // Add questionStrings to list view
